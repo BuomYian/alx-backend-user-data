@@ -6,6 +6,7 @@ filtered_logger module
 import re
 from typing import List
 
+
 def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
     """
     Obfuscates the log message by replacing specified fields with the redaction string.

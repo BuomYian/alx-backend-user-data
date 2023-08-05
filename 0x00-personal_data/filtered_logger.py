@@ -3,6 +3,7 @@
 filtered_logger module
 """
 
+import csv
 import logging
 import re
 from typing import List
@@ -57,3 +58,22 @@ class RedactingFormatter(logging.Formatter):
         """
         log_message = super().format(record)
         return filter_datum(self.fields, self.REDACTION, log_message, self.SEPARATOR)
+
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
+
+def get_logger() -> logging.Logger:
+    """
+    Returns a logging.Logger object named "user_data" that logs up to logging.INFO level.
+    The logger does not propagate messages to other loggers.
+    It has a StreamHandler with RedactingFormatter as formatter.
+
+    Returns:
+        logging.Logger: The "user_data" logger.
+    """
+    logger = logging.getLogger('user_data')
+    logger.setLevel(logging.INFO)
+    handler = logging.StreamHandler()
+    formatter = RedactingFormatter(fields=PII_FIELDS)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger

@@ -12,7 +12,8 @@ from datetime import datetime
 
 def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
     """
-    Obfuscates the log message by replacing specified fields with the redaction string.
+    Obfuscates the log message by replacing specified fields
+    with the redaction string.
 
     Args:
         fields: List of strings representing all fields to obfuscate.
@@ -59,7 +60,9 @@ class RedactingFormatter(logging.Formatter):
         log_message = super().format(record)
         return filter_datum(self.fields, self.REDACTION, log_message, self.SEPARATOR)
 
+
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
+
 
 def get_logger() -> logging.Logger:
     """
@@ -72,6 +75,7 @@ def get_logger() -> logging.Logger:
     """
     logger = logging.getLogger('user_data')
     logger.setLevel(logging.INFO)
+    logger.propagate = False
     handler = logging.StreamHandler()
     formatter = RedactingFormatter(fields=PII_FIELDS)
     handler.setFormatter(formatter)

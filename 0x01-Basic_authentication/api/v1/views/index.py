@@ -32,7 +32,7 @@ def unauthorized_endpoint():
     Raise a 401 error
     """
     abort(401)
-  
+
 
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
 def forbidden_endpoint():

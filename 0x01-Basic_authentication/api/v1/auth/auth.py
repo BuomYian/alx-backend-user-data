@@ -23,7 +23,7 @@ class Auth:
             if excluded_path.endswith('/') and path.startswith(excluded_path):
                 return False
 
-        return True
+        return False
 
     def authorization_header(self, request=None) -> str:
         """ Retrieving authorization header

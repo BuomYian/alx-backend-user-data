@@ -40,6 +40,8 @@ def authenticate_user():
                 abort(401)
             if user is None:
                 abort(403)
+            # Assign the authenticated user to the request context
+            request.current_user = user
 
 
 @app.errorhandler(404)

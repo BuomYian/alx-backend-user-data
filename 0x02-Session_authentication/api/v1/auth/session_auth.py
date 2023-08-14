@@ -28,5 +28,5 @@ class SessionAuth(Auth):
         """
         User id for the session
         """
-        if session_id is isinstance(session_id, str):
+        if type(session_id) is str:
             return self.user_id_by_session_id.get(session_id)

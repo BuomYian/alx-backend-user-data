@@ -40,3 +40,12 @@ class Auth:
         """ Retrieving current user
         """
         return None
+
+    def session_cookies(self, request=None):
+        """
+        Cookie value for a request
+        """
+        if request is None:
+            return None
+        _my_session_id = request.headers.get("SESSION_NAME")
+        return _my_session_id

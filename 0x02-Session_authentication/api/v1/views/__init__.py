@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Initialize the views blueprint
+""" DocDocDocDocDocDoc
 """
 
 from api.v1.views.session_auth import *

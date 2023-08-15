@@ -3,7 +3,7 @@
 SessionAuth view module
 """
 
-from flask import Flask, request, jsonify, make_response
+from flask import request, jsonify
 from api.v1.views import app_views
 from models.user import User
 from api.v1.app import auth

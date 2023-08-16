@@ -55,16 +55,6 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         """
         Find a user in the database by keyword arguments.
-
-        Args:
-            kwargs: Arbitrary keyword arguments for filtering.
-
-        Returns:
-            User: The User object matching the filter criteria.
-
-        Raises:
-            NoResultFound: If no user matches the filter criteria.
-            InvalidRequestError: If wrong query arguments are passed.
         """
         fields, values = [], []
         for key, value in kwargs.items():

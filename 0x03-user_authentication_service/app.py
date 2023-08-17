@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple Flask app
+Simple Flask app with user authentication features.
 """
 
 from flask import Flask, jsonify
@@ -10,8 +10,9 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"], strict_slashes=False)
 def welcome() -> str:
-    """
-    JSON payload of the form.
+    """GET /
+    Return:
+        - The home page's payload.
     """
     return jsonify({"message": "Bienvenue"})
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-define a _hash_password method that takes in 
-a password string arguments and returns bytes.
+define a _hash_password method
 """
 
 import bcrypt
@@ -18,5 +17,5 @@ def _hash_password(password: str) -> bytes:
         bytes: The hashed and salted password.
     """
     salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt)
-    return hashed_password
+    encoded_pw = bcrypt.hashpw(password.encode("utf-8"), salt)
+    return encoded_pw

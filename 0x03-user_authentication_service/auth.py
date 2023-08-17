@@ -80,7 +80,8 @@ class Auth:
         return session_id
 
     def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
-        """ Retrieves a user based on a given session ID.
+        """
+        Retrieves a user based on a given session ID.
         """
         if session_id is None:
             return None
@@ -96,13 +97,16 @@ class Auth:
         self._db.update_user(user_id, session_id=None)
 
     def get_reset_password_token(self, email: str) -> str:
-        """Generates a password reset token for a user.
         """
+        Generates a password reset token for a user.
+        """
+        user = None
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
-            raise ValueError(f"User {email} not found")
-
-        reset_token = str(uuid4())
+            user = None
+        if user is None:
+            raise ValueError()
+        reset_token = _generate_uuid()
         self._db.update_user(user.id, reset_token=reset_token)
         return reset_token

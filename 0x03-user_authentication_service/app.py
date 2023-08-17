@@ -23,12 +23,10 @@ def welcome() -> str:
 def register_user() -> str:
     """Define a route for POST requests to /users
     """
-    email = request.form.get("email")
-    password = request.form.get("password")
-    
+    email, password = request.form.get("email"), request.form.get("password")
     try:
-        user = AUTH.register_user(email, password)
-        return jsonify({"email": user.email, "message": "user created"})
+        AUTH.register_user(email, password)
+        return jsonify({"email": email, "message": "user created"})
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
 

@@ -21,7 +21,10 @@ def welcome() -> str:
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
 def register_user() -> str:
-    """Define a route for POST requests to /users
+    """
+    POST /users
+    Return:
+        - The account creation payload.
     """
     email, password = request.form.get("email"), request.form.get("password")
     try:

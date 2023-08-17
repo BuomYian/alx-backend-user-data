@@ -67,11 +67,13 @@ class Auth:
     def create_session(self, email: str) -> str:
         """Creates a new session for the user and returns the session ID.
         """
+        user = None
         try:
             user = self._db.find_user_by(email=email)
-            session_id = str(uuid4())
-            user.session_id = session_id
-            self._db._session.commit()  # Commit the change to the database
-            return session_id
         except NoResultFound:
             return None
+        if user is None:
+            return None
+        session_id = _generate_uuid()
+        self._db.update_user(user.id, session_id=session_id)
+        return session_id

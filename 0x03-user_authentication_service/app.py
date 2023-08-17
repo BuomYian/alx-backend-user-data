@@ -13,7 +13,7 @@ AUTH = Auth()
 @app.route("/", methods=["GET"], strict_slashes=False)
 def welcome() -> str:
     """GET /
-    Return:
+    Returns:
         - The home page's payload.
     """
     return jsonify({"message": "Bienvenue"})
@@ -23,7 +23,7 @@ def welcome() -> str:
 def register_user() -> str:
     """
     POST /users
-    Return:
+    Returns:
         - The account creation payload.
     """
     email, password = request.form.get("email"), request.form.get("password")

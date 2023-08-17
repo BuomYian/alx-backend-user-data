@@ -7,8 +7,8 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route("/")
-def welcome():
+@app.route("/", methods=["GET"], strict_slashes=False)
+def welcome() -> str:
     """
     JSON payload of the form.
     """

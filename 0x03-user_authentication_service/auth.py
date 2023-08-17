@@ -8,6 +8,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
 
+
 def _hash_password(password: str) -> bytes:
     """
     Hashes a password using bcrypt with a salt.
@@ -21,6 +22,7 @@ def _hash_password(password: str) -> bytes:
     salt = bcrypt.gensalt()
     encoded_pw = bcrypt.hashpw(password.encode("utf-8"), salt)
     return encoded_pw
+
 
 class Auth:
     """Auth class to interact with the authentication database.
@@ -39,3 +41,12 @@ class Auth:
             hashed_password = _hash_password(password)
             user = self._db.add_user(email, hashed_password)
             return user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """Validates a user's login credentials.
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+            return self._check_password(password, user.hashed_password)
+        except NoResultFound:
+            return False
